@@ -9,13 +9,6 @@ A collection of p5.js sketches for generating sleep-screen artwork for an XTeink
 - `scripts/p5-10print-polygon-480x800.js`: "10 PRINT"-style thick slash polygons
 - `scripts/p5-smith-tiles-480x800.js`: constrained checkerboard group placement
 
-## Hex tile-set
-
-- `other/p5-hex-tile-set.js`: labeled hex tile-set definitions
-- `other/p5-hex-random-first-attempt.js`: first random hex tiling attempt
-- `other/p5-hex-random-second-attempt.js`: second constrained hex tiling attempt
-- `other/truchet_hex_rule_based_second_attempt.js`: rule-based hex placement attempt
-
 ## Examples
 
 ### Smith tiles
@@ -40,10 +33,8 @@ A collection of p5.js sketches for generating sleep-screen artwork for an XTeink
 2. Paste one sketch file into the editor
 3. Run
 
-## Export
+## Usage
 
-Most sketches support:
 
 - `R` to regenerate
-- `S` to save a PNG
-  - Use an image editor to convert to BMP
+- `S` to save a BMP
