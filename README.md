@@ -9,15 +9,14 @@ A collection of p5.js sketches exploring square and hex-based Truchet-style tile
 - `p5-truchet-arcs-480x800.js`: classic two-arc Truchet tiles
 - `p5-10print-polygon-480x800.js`: "10 PRINT"-style thick slash polygons
 - `p5-smith-tiles-480x800.js`: constrained checkerboard group placement
-- `truchet_480x800.js`: additional 480x800 sketch
 - `truchet_classic_p5.js`: additional classic p5 sketch
 
-## Hex tile-set 
+## Hex tile-set
 
 - `p5-hex-tile-set.js`: labeled hex tile-set definitions
 - `p5-hex-random-first-attempt.js`: first random hex tiling attempt
 - `p5-hex-random-second-attempt.js`: second constrained hex tiling attempt
-
+- `truchet_hex_rule_based_second_attempt.js`: rule-based hex placement attempt
 
 ## Running a single sketch in the p5 web editor
 
