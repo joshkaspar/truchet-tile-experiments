@@ -1,10 +1,10 @@
-# Truchet Tile Experiments
+# XTeink X4 Sleep Screens
 
-A collection of p5.js sketches exploring square and hex-based Truchet-style tile systems. It started as a way to generate sleep-screen artwork for an XTeink X4 e-ink display and has diverged into some experiments with my own tilesets.
+A collection of p5.js sketches for generating sleep-screen artwork for an XTeink X4 e-ink display, with Truchet and tile-system experiments.
 
 ## Sketches
 
-- `p5-truchet-diagonal.js`: classic diagonal split square tiles (random 4-way rotation)
+- `other/p5-truchet-diagonal.js`: classic diagonal split square tiles (random 4-way rotation)
 - `scripts/p5-truchet-diagonal-480x800.js`: diagonal split variant sized for 480x800
 - `scripts/p5-truchet-arcs-480x800.js`: classic two-arc Truchet tiles
 - `scripts/p5-10print-polygon-480x800.js`: "10 PRINT"-style thick slash polygons
