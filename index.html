@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inksomnia</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+      }
+      .topbar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding: 10px 12px;
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+      }
+      select,
+      button {
+        padding: 6px 8px;
+      }
+      .hint {
+        margin-left: auto;
+        color: #555;
+        font-size: 13px;
+      }
+    </style>
+    <script src="assets/p5.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <label for="sketch">Sketch:</label>
+      <select id="sketch"></select>
+      <button id="load" type="button">Load</button>
+      <span class="hint">Press R to regenerate, S to save BMP</span>
+    </div>
+
+    <script>
+      const sketches = [
+        "scripts/p5-truchet-diagonal-480x800.js",
+        "scripts/p5-truchet-arcs-480x800.js",
+        "scripts/p5-10print-polygon-480x800.js",
+        "scripts/p5-smith-tiles-480x800.js",
+      ];
+
+      const selectEl = document.getElementById("sketch");
+      const loadBtn = document.getElementById("load");
+      const params = new URLSearchParams(window.location.search);
+      const selected = params.get("sketch");
+
+      for (const path of sketches) {
+        const opt = document.createElement("option");
+        opt.value = path;
+        opt.textContent = path.replace(/^scripts\//, "");
+        selectEl.appendChild(opt);
+      }
+
+      const chosen = sketches.includes(selected) ? selected : sketches[0];
+      selectEl.value = chosen;
+
+      loadBtn.addEventListener("click", () => {
+        const u = new URL(window.location.href);
+        u.searchParams.set("sketch", selectEl.value);
+        window.location.href = u.toString();
+      });
+
+      const script = document.createElement("script");
+      script.src = chosen;
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>
