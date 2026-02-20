@@ -94,7 +94,7 @@ function saveBMP(filename = "canvas") {
   const view = new DataView(buf);
   const out = new Uint8Array(buf);
 
-  view.setUint16(0, 0x424d, true);
+  view.setUint16(0, 0x424d);
   view.setUint32(2, 54 + imgSize, true);
   view.setUint32(6, 0, true);
   view.setUint32(10, 54, true);
