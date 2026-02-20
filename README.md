@@ -15,17 +15,24 @@ A collection of p5.js sketches for generating sleep-screen artwork for an XTeink
 
 ### Smith tiles
 
-![Smith tiles example](examples/smith_tiles_480x800.bmp)
+<img src="examples/smith_tiles_480x800.bmp" alt="Smith tiles example" width="220" />
 
 ### 10 PRINT
 
-![10 PRINT example](examples/truchet_10print_480x800.bmp)
+<img src="examples/truchet_10print_480x800.bmp" alt="10 PRINT polygon example" width="220" />
+
+### 10 PRINT Lines
+
+<img src="examples/10print_lines.bmp" alt="10 PRINT lines example" width="220" />
 
 ### Arc tiles
 
-![Arc tiles example](examples/truchet_arcs_c2480x800.bmp)
+<img src="examples/truchet_arcs_c2480x800.bmp" alt="Arc tiles example" width="220" />
 
 ### Diagonal tiles
 
-![Diagonal tiles example](examples/truchet_b480x800.bmp)
+<img src="examples/truchet_b480x800.bmp" alt="Diagonal tiles example" width="220" />
 
+### Train Tracks
+
+<img src="examples/train_tracks.bmp" alt="Train tracks example" width="220" />
