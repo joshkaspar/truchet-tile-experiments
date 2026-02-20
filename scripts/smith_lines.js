@@ -1,8 +1,6 @@
-// Pure black and white for e-ink displays
-const bgColor = "#ffffff";
-const fgColor = "#000000";
-
 const tileSize = 40;
+const lightCol = "#ffffff";
+const darkCol = "#000000";
 
 function saveBMP(filename = "canvas") {
   const c =
@@ -69,72 +67,71 @@ function saveBMP(filename = "canvas") {
 
 function setup() {
   createCanvas(480, 800);
-  noLoop(); // We only need to draw once
+  noLoop();
+
+  const btnStyle = `
+    display: inline-block;
+    margin: 8px 4px 0;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #1f1f1f;
+    color: #fff;
+    touch-action: manipulation;
+  `;
+
+  const redrawBtn = createButton('Redraw');
+  redrawBtn.attribute('style', btnStyle);
+  redrawBtn.mousePressed(() => redraw());
+
+  const saveBtn = createButton('Save BMP');
+  saveBtn.attribute('style', btnStyle);
+  saveBtn.mousePressed(() => saveBMP('smith_lines'));
 }
 
 function draw() {
-  background(bgColor);
+  // Use the light color for the background for a seamless look
+  background(lightCol);
 
   const cols = width / tileSize;
   const rows = height / tileSize;
 
   for (let gy = 0; gy < rows; gy++) {
     for (let gx = 0; gx < cols; gx++) {
+      // Position is top-left corner of the tile
       const x = gx * tileSize;
       const y = gy * tileSize;
 
       push();
-      translate(x, y); // Move origin to the tile's top-left corner
-      draw10PrintPolygon(tileSize);
+      translate(x, y); // Move origin to the tile's corner
+      drawArcTile(tileSize);
       pop();
     }
   }
 }
 
 /**
- * Draws the '10 PRINT' pattern using a filled hexagon
- * to create a 'fat' slash with pointed ends that meet the tile edges.
+ * Draws a Truchet tile with two arcs within a square of size 's'.
+ * There are two possible orientations, chosen randomly.
  */
-function draw10PrintPolygon(s) {
-  // The 'fatness' of the slash. This value is the inset from the corner.
-  // A larger value makes a thinner slash. A good value is between 25-40% of tile size.
-  const fatness = s * 0.35;
+function drawArcTile(s) {
+  noFill();
+  stroke(darkCol);
+  // A thicker stroke looks better for these arcs
+  strokeWeight(s * 0.2); // Make stroke width proportional to tile size
 
-  noStroke();
-  fill(fgColor);
-
-  // Randomly choose one of the two slash orientations
+  // p5.js arc() takes: x, y, width, height, startAngle, endAngle
+  // [p5js.org]
   if (random(1) > 0.5) {
-    // Draw a forward-slash: /
-    // This is a hexagon defined by six vertices.
-    beginShape();
-    vertex(s - fatness, 0); // Top edge, left point
-    vertex(s, 0); // Top-right corner
-    vertex(s, fatness); // Right edge, top point
-    vertex(fatness, s); // Bottom edge, right point
-    vertex(0, s); // Bottom-left corner
-    vertex(0, s - fatness); // Left edge, bottom point
-    endShape(CLOSE);
+    // Orientation 1: Top-Left and Bottom-Right arcs
+    arc(0, 0, s, s, 0, HALF_PI);
+    arc(s, s, s, s, PI, PI + HALF_PI);
   } else {
-    // Draw a back-slash: \
-    // This is the other hexagon.
-    beginShape();
-    vertex(0, fatness); // Left edge, top point
-    vertex(0, 0); // Top-left corner
-    vertex(fatness, 0); // Top edge, right point
-    vertex(s, s - fatness); // Right edge, bottom point
-    vertex(s, s); // Bottom-right corner
-    vertex(s - fatness, s); // Bottom edge, left point
-    endShape(CLOSE);
+    // Orientation 2: Top-Right and Bottom-Left arcs
+    arc(s, 0, s, s, HALF_PI, PI);
+    arc(0, s, s, s, PI + HALF_PI, TWO_PI);
   }
 }
 
-function keyPressed() {
-  if (key === "r" || key === "R" || keyCode === 32) {
-    // Allow spacebar too
-    redraw(); // Regenerate the maze
-  }
-  if (key === "s" || key === "S") {
-    saveBMP("10print_e-ink");
-  }
-}

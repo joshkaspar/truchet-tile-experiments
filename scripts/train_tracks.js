@@ -9,6 +9,27 @@ function setup() {
   strokeWeight(2);
   strokeCap(SQUARE);
   noLoop();
+
+  const btnStyle = `
+    display: inline-block;
+    margin: 8px 4px 0;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #1f1f1f;
+    color: #fff;
+    touch-action: manipulation;
+  `;
+
+  const redrawBtn = createButton('Redraw');
+  redrawBtn.attribute('style', btnStyle);
+  redrawBtn.mousePressed(() => redraw());
+
+  const saveBtn = createButton('Save BMP');
+  saveBtn.attribute('style', btnStyle);
+  saveBtn.mousePressed(() => saveBMP('train_tracks'));
 }
 
 function draw() {
@@ -67,10 +88,7 @@ function draw() {
   }
 }
 
-function keyPressed() {
-  if (key === "r" || key === "R") redraw();
-  if (key === "s" || key === "S") saveBMP("train_tracks");
-}
+
 
 function saveBMP(filename = "canvas") {
   const c =

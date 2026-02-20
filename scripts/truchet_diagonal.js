@@ -45,59 +45,67 @@ function saveBMP(filename) {
 }
 
 function setup() {
-  // Set canvas size to 480x800
-  createCanvas(480, 800); 
-  noLoop(); // We only need to draw once
+  createCanvas(480, 800);
+  noLoop();
   rectMode(CENTER);
+
+  const btnStyle = `
+    display: inline-block;
+    margin: 8px 4px 0;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #1f1f1f;
+    color: #fff;
+    touch-action: manipulation;
+  `;
+
+  const redrawBtn = createButton('Redraw');
+  redrawBtn.attribute('style', btnStyle);
+  redrawBtn.mousePressed(() => redraw());
+
+  const saveBtn = createButton('Save BMP');
+  saveBtn.attribute('style', btnStyle);
+  saveBtn.mousePressed(() => saveBMP('truchet_diagonal'));
 }
 
 function draw() {
   background("#d9d9d9");
 
-  const cols = floor(width / tileSize); // Will be 12
-  const rows = floor(height / tileSize); // Will be 20
+  const cols = floor(width / tileSize);
+  const rows = floor(height / tileSize);
 
   for (let gy = 0; gy < rows; gy++) {
     for (let gx = 0; gx < cols; gx++) {
-      // Calculate the center of the current tile
       const x = gx * tileSize + tileSize / 2;
       const y = gy * tileSize + tileSize / 2;
-      
-      const rot = floor(random(4)); // 4 possible rotations
 
-      push(); // Save the current drawing state
-      translate(x, y); // Move the origin to the center of the tile
-      rotate(rot * HALF_PI); // Rotate the grid
+      const rot = floor(random(4));
+
+      push();
+      translate(x, y);
+      rotate(rot * HALF_PI);
       drawDiagonalTile(tileSize);
-      pop(); // Restore the original drawing state
+      pop();
     }
   }
 }
 
 function drawDiagonalTile(s) {
-  const h = s / 2; // Half the size
+  const h = s / 2;
 
   stroke(lineCol);
   strokeWeight(1);
 
-  // Two triangles split by a diagonal line
   fill(lightCol);
   triangle(-h, -h, h, -h, -h, h);
 
   fill(darkCol);
   triangle(h, h, h, -h, -h, h);
 
-  // Optional border to emphasize tile edges
   noFill();
   stroke("#999");
   rect(0, 0, s, s);
-}
-
-function keyPressed() {
-  if (key === "r" || key === "R") {
-    redraw(); // regenerate the pattern
-  }
-  if (key === "s" || key === "S") {
-    saveBMP("truchet_480x800");
-  }
 }

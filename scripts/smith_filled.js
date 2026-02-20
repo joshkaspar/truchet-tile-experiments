@@ -71,6 +71,27 @@ function saveBMP(filename = "canvas") {
 function setup() {
   createCanvas(480, 800);
   noLoop();
+
+  const btnStyle = `
+    display: inline-block;
+    margin: 8px 4px 0;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #1f1f1f;
+    color: #fff;
+    touch-action: manipulation;
+  `;
+
+  const redrawBtn = createButton('Redraw');
+  redrawBtn.attribute('style', btnStyle);
+  redrawBtn.mousePressed(() => redraw());
+
+  const saveBtn = createButton('Save BMP');
+  saveBtn.attribute('style', btnStyle);
+  saveBtn.mousePressed(() => saveBMP('smith_filled'));
 }
 
 function draw() {
@@ -147,7 +168,3 @@ function drawTile(s, type) {
   }
 }
 
-function keyPressed() {
-  if (key === "r" || key === "R") redraw();
-  if (key === "s" || key === "S") saveBMP("smith_tiles");
-}
